@@ -8,7 +8,7 @@
 	<p>Add a new book:</p>
 	<p><a href="/">Back to home page</a></p>
 	
-	<form th:object="${book}" th:action="@{savebook}" action="#" method="post">
+	<form th:object="${book}" th:action="@{/savebook}" action="#" method="post">
 		<label>Title:</label><br>
 		<input type="text" id="title" th:field="*{title}"><br>
 		<label>Author:</label><br>
@@ -19,6 +19,13 @@
 		<input type="text" id="isbn" th:field="*{isbn}"><br>
 		<label>Price:</label><br>
 		<input type="text" id="price" th:field="*{price}"><br>
+		<label>Category</label><br>
+		<select id="categorylist" th:field="*{category}">
+			<option th:each="category: ${categories}" 
+					th:value="${category.categoryId}" 
+					th:text="${category.name}">
+			</option>
+		</select><br>
 		
 		<input type="submit" value="Add">
 	</form>

@@ -11,6 +11,8 @@ import hh.springproject.bookstore.domain.Book;
 import hh.springproject.bookstore.domain.BookRepository;
 import hh.springproject.bookstore.domain.Category;
 import hh.springproject.bookstore.domain.CategoryRepository;
+import hh.springproject.bookstore.domain.User;
+import hh.springproject.bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -25,8 +27,14 @@ public class BookstoreApplication {
 	
 	//test data for H2
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository bookRepository, CategoryRepository categoryRepository) {
+	public CommandLineRunner bookDemo(BookRepository bookRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
 		return (args) -> {
+			log.info("Create users");
+			// user/salasana, admin/sanasala
+			userRepository.save(new User("user", "$2a$10$nBgjJ9qQB2poMNZkY2D5HuAscR7wTmOVtJvMb7Dn.r2JNGyCZNvEG", "USER"));
+			userRepository.save(new User("admin", "$2a$10$rK1ortSlb6ompzrcsDTSaOG0DPxPm3scube7fFNiXYN3w9IYX08TG", "ADMIN"));
+			
+			
 			log.info("Save some categories");
 			categoryRepository.save(new Category("Music"));
 			categoryRepository.save(new Category("Poetry"));
